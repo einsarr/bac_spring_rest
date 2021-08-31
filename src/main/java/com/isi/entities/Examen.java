@@ -29,6 +29,9 @@ public class Examen implements Serializable {
     @OneToMany(mappedBy = "examen")
     private List<Epreuve> epreuveList;
 
+    @ManyToOne
+    private User user;
+
     public Examen(Long id, String libelle_examen, Annee annee) {
         this.id = id;
         this.libelle_examen = libelle_examen;
