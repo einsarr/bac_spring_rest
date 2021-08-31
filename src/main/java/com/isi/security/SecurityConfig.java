@@ -28,22 +28,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.jdbcAuthentication()
 			.dataSource(dataSource)
 			.usersByUsernameQuery("SELECT email as principal, password as credentials, etat FROM user WHERE email =  ?")
-			.authoritiesByUsernameQuery("SELECT email as principal, nom as role FROM professeurs_roles WHERE email = ?")
+			.authoritiesByUsernameQuery("SELECT users_email as principal, role_id as role FROM user_roles WHERE users_email = ?")
 			.passwordEncoder(new BCryptPasswordEncoder());
 		
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//http.formLogin();//pour afficher un formulaire de connexion par defaut
-		http.formLogin().loginPage("/online/login");//personnaliser le form de login
+		http.formLogin().loginPage("/login");//personnaliser le form de login
 		//les droits dun USER
-		http.authorizeRequests().antMatchers("/online/cours").hasAnyAuthority("ROLE_USER", "ROLE_ETUDIANT", "ROLE_PROFESSEUR");
+		http.authorizeRequests().antMatchers("/annees").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_SUPER");
 		//les droits du role ETUDIANT
-		http.authorizeRequests().antMatchers("/online/etudiants").hasAnyAuthority("ROLE_ETUDIANT", "ROLE_PROFESSEUR");
+		http.authorizeRequests().antMatchers("/annees").hasAnyAuthority("ROLE_TECHNICIEN", "ROLE_ADMIN");
 		//les droits du role PROFESSEUR
-		http.authorizeRequests().antMatchers("/online/professeurs").hasAuthority("ROLE_PROFESSEUR");
+		http.authorizeRequests().antMatchers("/annees").hasAuthority("ROLE_TECHNICIEN");
 		//gestion des droits
-		http.exceptionHandling().accessDeniedPage("/online/403");
+		http.exceptionHandling().accessDeniedPage("/403");
 		http.csrf().disable();
 	}
 

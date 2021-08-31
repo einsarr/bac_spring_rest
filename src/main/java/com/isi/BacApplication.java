@@ -41,45 +41,45 @@ public class BacApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*Date d = null;
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			d = sdf.parse("2000-02-02");
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		etudiantDao.save(new Etudiant(null,"544B120","Nicephor","Iloky",d,"BRAZA"));
-		etudiantDao.save(new Etudiant(null,"32B120","Moussa","DIOP",d,"BRAZA"));
-		anneeDao.save(new Annee(null,2021));
-		examenDao.save(new Examen(null,"Baccalaureat de philo",anneeDao.getById(1L)));
-		resultatDao.save(new Resultat(null,d,true));
-		etudiantExamenDao.save(new EtudiantExamen(null,examenDao.getById(1L),etudiantDao.getById(1L),resultatDao.getById(1L)));
-*/
-		Role r = new Role();
-		r.setLibelle_role("ROLE_SUPER");
-		Role r1 = new Role();
-		r1.setLibelle_role("ROLE_TECHNICIEN");
-		roleDao.save(r);
-		roleDao.save(r1);
-
-		List<Role> lRoles = new ArrayList<>();
-		lRoles.add(r);
-		lRoles.add(r1);
-
-		lRoles.add(roleDao.getById(2L));
-
-		User u = new User();
-		u.setPrenom("Ablaye");
-		u.setNom("CISSE");
-		u.setEmail("cissand@gmail.com");
-		//cryp password
-		String pwd = "passer123";
-		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
-		String hashedPwd = pwdEncoder.encode(pwd);
-		u.setPassword(hashedPwd);
-		u.setEtat(1);
-		u.setRoles(lRoles);
-		userDao.save(u);
+//		Date d = null;
+//		try {
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//			d = sdf.parse("2000-02-02");
+//		}catch (Exception e){
+//			e.printStackTrace();
+//		}
+//		etudiantDao.save(new Etudiant(null,"544B120","Nicephor","Iloky",d,"BRAZA"));
+//		etudiantDao.save(new Etudiant(null,"32B120","Moussa","DIOP",d,"BRAZA"));
+//		anneeDao.save(new Annee(null,2021));
+//		examenDao.save(new Examen(null,"Baccalaureat de philo",anneeDao.getById(1L)));
+//		resultatDao.save(new Resultat(null,d,true));
+//		etudiantExamenDao.save(new EtudiantExamen(null,examenDao.getById(1L),etudiantDao.getById(1L),resultatDao.getById(1L)));
+//
+//		Role r = new Role();
+//		r.setLibelle_role("ROLE_SUPER");
+//		Role r1 = new Role();
+//		r1.setLibelle_role("ROLE_TECHNICIEN");
+//		roleDao.save(r);
+//		roleDao.save(r1);
+//
+//		List<Role> lRoles = new ArrayList<>();
+//		lRoles.add(r);
+//		lRoles.add(r1);
+//
+//		lRoles.add(roleDao.getById(2L));
+//
+//		User u = new User();
+//		u.setPrenom("Ablaye");
+//		u.setNom("CISSE");
+//		u.setEmail("cissand@gmail.com");
+//		//cryp password
+//		String pwd = "passer123";
+//		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+//		String hashedPwd = pwdEncoder.encode(pwd);
+//		u.setPassword(hashedPwd);
+//		u.setEtat(1);
+//		u.setRoles(lRoles);
+//		userDao.save(u);
 
 	}
 }

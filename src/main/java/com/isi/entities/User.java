@@ -16,13 +16,11 @@ import java.util.List;
 @ToString
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String email;
     private String prenom;
     private String nom;
     private String password;
     private int etat;
-    private String email;
     @ManyToMany
     List<Role> roles = new ArrayList<>();
 
