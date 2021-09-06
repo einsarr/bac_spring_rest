@@ -1,6 +1,7 @@
 package com.isi.controllers;
 
 import com.isi.dao.IUser;
+import com.isi.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,8 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,12 +31,23 @@ public class UserController {
      */
     @RequestMapping(value = "/login")
     public String login() {
-
-        return "pageUsers";
+        return "login";
     }
+    @RequestMapping(value = "/connect")
+    public String pageUsers(@RequestParam String email,@RequestParam String password) {
+        System.out.println(email);
+        BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		password = pwdEncoder.encode(password);
+        User u = userdao.findUserByEmailAndPassword(email,password);
+        if(u!=null){
+            return "pageUsers";
+        }else{
+            return "login";
+        }
+    }
+
     @RequestMapping(value = "/pageUsers")
     public String pageUsers() {
-
         return "pageUsers";
     }
 

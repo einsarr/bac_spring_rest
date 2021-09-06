@@ -1,7 +1,5 @@
 package com.isi.security;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 @Configuration
 @EnableAutoConfiguration
 @EnableWebSecurity
@@ -21,13 +18,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
-	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
 		auth.jdbcAuthentication()
 			.dataSource(dataSource)
-			.usersByUsernameQuery("SELECT email as principal, password as credentials, etat FROM user WHERE email =  ?")
+			.usersByUsernameQuery("SELECT email as principal, password as credentials FROM user WHERE email =  ?")
 			.authoritiesByUsernameQuery("SELECT users_email as principal, role_id as role FROM user_roles WHERE users_email = ?")
 			.passwordEncoder(new BCryptPasswordEncoder());
 		
